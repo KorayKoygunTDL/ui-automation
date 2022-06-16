@@ -1,4 +1,3 @@
-
 networks:
   test-automation-setup:
     external: true
