@@ -1,0 +1,23 @@
+version: "3"
+networks:
+  test-automation-setup:
+    driver: bridge
+services:
+  selenium-hub:
+    image: selenium/hub:3.141.59-20210929
+    container_name: selenium-hub
+    ports:
+      - "4444:4444"
+    networks:
+        - test-automation-setup
+
+  chrome:
+    image: selenium/node-chrome:3.141.59-20210929
+    shm_size: '2gb'
+    depends_on:
+      - selenium-hub
+    environment:
+      - HUB_HOST=selenium-hub
+      - HUB_PORT=4444
+    networks:
+        - test-automation-setup
